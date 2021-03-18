@@ -1,0 +1,49 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Vino Cellar | {{ vino.name }} | Vino{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="col-sm-6">
+		<h1 class="monospace">
+			{{ vino.name }}
+		</h1>
+		<p class="subtitle">
+			ID: {{ vino.id }}
+			<button class="del-button-vino"
+			data-id="{{ vino.id }}">&cross;</button><br/>
+			<a href='{{url_for('edit_vino',
+			vino_id=vino.id)}}'>Edit Vino</a><br>
+		</p>
+		<p>
+			<i class="fas fa-calendar-alt"></i>
+			{{ vino.year }} Vintage
+		</p>
+		<div class="genres">
+			{% for varietal in vino.varietal %}
+			<span class="genre">{{ varietal }}</span>
+			{% endfor %}
+		</div>
+		<p>
+			<i class="fas fa-angle-right"></i>
+			Type: {{ vino.type }}
+		</p>
+		<p>
+			<i class="fas fa-angle-right"></i>
+			Style: {{ vino.style }}
+		</p>
+		<p>
+			<i class="fas fa-angle-right"></i>
+			{{ vino.abv }}% ABV
+		</p>
+		<p>
+			<i class="fas fa-tractor"></i>
+			Vintner:
+			<a href="/vintners/{{ vino.vintner_id }}">
+			{{ vino.vintner_name }}</a>
+		</p>
+	</div>
+	<div class="col-sm-6">
+		<img src="{{ vino.image_link }}" alt="Vino Image" />
+	</div>
+</div>
+
+{% endblock %}

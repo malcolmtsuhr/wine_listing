@@ -1,0 +1,61 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Vino Cellar{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="col-sm-6">
+		<h1>Vino Cellar 🍇</h1>
+		<p class="lead">Where wine data is cellared.</p>
+		<h3>
+			<a href="/vintners">
+				<button class="btn btn-primary btn-lg">Find a vintner</button></a>
+			{% if session['profile'] %}
+			<a href="/vintners/create">
+				<button class="btn btn-default btn-lg">Post a vintner</button></a>
+			{% else %}
+			{% endif %}
+		</h3>
+		<h3>
+			<a href="/wines">
+				<button class="btn btn-primary btn-lg">Find a wine</button></a>
+		</h3>
+	</div>
+	<div class="col-sm-6 hidden-sm hidden-xs">
+		<img id="front-splash"
+		src="{{ url_for('static',filename='img/front-splash.jpg') }}"
+		alt="Front Photo of Wine and Winery" />
+		<small>Image Credit: courtesy of Kym Ellis on Unsplash</small>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6">
+		<h3>Recently Listed Vintners</h3>
+		<ul class="items">
+			{% for vintner in vintners %}
+			<li>
+				<a href="/vintners/{{ vintner.id }}">
+					<i class="fas fa-tractor"></i>
+					<div class="item">
+						<h5>{{ vintner.name }}</h5>
+					</div>
+				</a>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="col-sm-6">
+		<h3>Recently Listed Wines</h3>
+		<ul class="items">
+			{% for vino in wines %}
+			<li>
+				<a href="/wines/{{ vino.id }}">
+					<i class="fas fa-wine-glass"></i>
+					<div class="item">
+						<h5>{{ vino.name }}</h5>
+					</div>
+				</a>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+{% endblock %}

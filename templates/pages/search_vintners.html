@@ -1,0 +1,18 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Vino Cellar | Vintners Search{% endblock %}
+{% block content %}
+<h3>Number of search results for "{{ search_term }}": {{ results.count }}</h3>
+<ul class="items">
+	{% for vintner in results.data %}
+	<li>
+		<a href="/vintners/{{ vintner.id }}">
+			<i class="fas fa-tractor"></i>
+			<div class="item">
+				<h5>{{ vintner.name }}</h5>
+				<h6>{{ vintner.num_wines }} wines listed</h6>
+			</div>
+		</a>
+	</li>
+	{% endfor %}
+</ul>
+{% endblock %}

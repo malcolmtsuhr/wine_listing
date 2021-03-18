@@ -1,0 +1,44 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Vino Cellar | Edit Vino{% endblock %}
+{% block content %}
+  <div class="form-wrapper">
+    <form class="form" method="post" action="/wines/{{vino.id}}/edit">
+      <h3 class="form-heading">Edit vino <em>{{ vino.name }}</em>
+        by vintner {{ vino.vintner_name }}</h3>
+      <div class="form-group">
+        <label for="name">Wine Name</label>
+        {{ form.name(class_ = 'form-control', value=vino.name, autofocus = true) }}
+      </div>
+      <div class="form-group">
+          <label for="year">Wine Vintage</label><br/>
+          {{ form.year(class_ = 'form-control', value=vino.year, type='number') }}
+      </div>
+      <div class="form-group">
+        <label for="type">Wine Type</label>
+        <select class="form-control" id="type" name="type" required="">
+          {% for type in types %}
+          <option value={{ type.id }} {% if vino.type_id == type.id %}selected=""{% else %}{% endif %}>{{ type.type }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="varietal">Varietals</label>
+        <small>Ctrl+Click to select multiple</small>
+        {{ form.varietal(class_ = 'form-control') }}
+      </div>
+      <div class="form-group">
+        <label for="style">Wine Style</label>
+        {{ form.style(class_ = 'form-control', value=vino.style) }}
+      </div>
+      <div class="form-group">
+          <label for="abv">Wine ABV %</label><br/>
+          {{ form.abv(class_ = 'form-control', value=vino.abv, type='decimal') }}
+      </div>
+      <div class="form-group">
+          <label for="image_link">Wine Image Link</label>
+          {{ form.image_link(class_ = 'form-control', placeholder='http://', value=vino.image_link, type='url') }}
+        </div>
+      <input type="submit" value="Edit Vino" class="btn btn-primary btn-lg btn-block">
+    </form>
+  </div>
+{% endblock %}

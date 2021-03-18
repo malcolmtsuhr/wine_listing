@@ -1,0 +1,20 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Vino Cellar | Wines{% endblock %}
+{% block content %}
+{% for type in types %}
+<h3>{% if type.wines %}{{ type.type }} Wines{% else %}{% endif %}</h3>
+<ul class="items">
+	{% for vino in type.wines %}
+	<li>
+		<a href="/wines/{{ vino.id }}">
+			<i class="fas fa-wine-glass"></i>
+			<div class="item">
+				<h5>{{ vino.name }}</h5>
+				<h6>{{ vino.year }} Vintage</h6>
+			</div>
+		</a>
+	</li>
+	{% endfor %}
+</ul>
+{% endfor %}
+{% endblock %}

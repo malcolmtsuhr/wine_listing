@@ -1,0 +1,49 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Vino Cellar | {{ vintner.name }} | Vintner{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="col-sm-6">
+		<h1 class="monospace">
+			{{ vintner.name }}
+		</h1>
+		<p class="subtitle">
+			ID: {{ vintner.id }}
+			<button class="del-button-vintner"
+			data-id="{{ vintner.id }}">&cross;</button><br/>
+			<a href='{{url_for('edit_vintner', vintner_id=vintner.id)}}'>Edit Vintner</a><br>
+		</p>
+		<p>
+			<i class="fas fa-globe-americas"></i> {% if vintner.appellation %}
+			{{ vintner.appellation.title() }}, {% else %}{% endif %}
+			{{ vintner.region.title() }}, {{ vintner.country }}
+		</p>
+		<p>
+			<i class="fas fa-link"></i>
+			{% if vintner.website %}
+			<a href="{{ vintner.website }}" target="_blank">{{ vintner.website }}</a>
+			{% else %}No Website{% endif %}
+		</p>
+		<a href="/vintners/{{ vintner.id }}/vino/create">
+			<button class="btn btn-default btn-lg">Post their Wine</button></a>
+	</div>
+	<div class="col-sm-6">
+		<img src="{{ vintner.image_link }}" alt="Vintner Image" />
+	</div>
+</div>
+<section>
+	<h2 class="monospace">{{ vintner.wines_count }} Listed
+		{% if vintner.wines_count == 1 %}Wine{% else %}Wines{% endif %}</h2>
+	<div class="row">
+		{%for vino in vintner.wines %}
+		<div class="col-sm-4">
+			<div class="tile tile-show">
+				<img src="{{ vino.vino_image_link }}" alt="Wine Image" />
+				<h5><a href="/wines/{{ vino.vino_id }}">
+					{{ vino.vino_name }}</a></h5>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+
+{% endblock %}
