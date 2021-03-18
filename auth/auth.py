@@ -1,40 +1,17 @@
 import json
-#from os import environ as env
 import os
 import sys
 from werkzeug.exceptions import HTTPException
 from flask import Flask, request, _request_ctx_stack, abort, session, redirect, jsonify
-#from flask_cors import cross_origin
 from functools import wraps
 from dotenv import load_dotenv, find_dotenv
 from jose import jwt
-#from authlib.jose import jwt
 from urllib.request import urlopen
-#from authlib.integrations.flask_client import OAuth
-#from six.moves.urllib.parse import urlencode
 from os import environ
 
 AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'http://0.0.0.1:8080'
-
-
-###
-#oauth = OAuth(app)
-
-# client_secret='YOUR_CLIENT_SECRET',
-
-#auth0 = oauth.register(
-#    'auth0',
-#    client_id='n1rJVCtvkXZUjYiFypLGp206po8MFmsS',
-#    client_secret='1haTrpczKaX_nvrs7jgQyAxDBdYAbxwPpyKevNxrjEfoOyaz7Z7sER2i0EzYV2c0',
-#    api_base_url='https://mtsuhr2021.us.auth0.com',
-#    access_token_url='https://mtsuhr2021.us.auth0.com/oauth/token',
-#    authorize_url='https://mtsuhr2021.us.auth0.com/authorize',
-#    client_kwargs={
-#        'scope': 'openid profile email',
-#    },
-#)
 
 '''
 AuthError Exception
@@ -61,16 +38,16 @@ get_token_auth_header() method
 def get_token_auth_header():
     """Obtains the Access Token from the Authorization Header
     """
-    #print("get token auth header start")
+    # print("get token auth header start")
     try:
         if 'Authorization' in request.headers:
             auth_header = request.headers['Authorization']
-            #print(auth_header)
+            # print(auth_header)
             if auth_header:
                 bearer_token_array = auth_header.split(' ')
                 if bearer_token_array[0] and bearer_token_array[0].lower() == "bearer" and bearer_token_array[1]:
                     token = bearer_token_array[1]
-                    #print("auth token: " + token)
+                    # print("auth token: " + token)
     except Exception:
         raise AuthError({
             'error': 'Authorization header is expected.',
@@ -127,13 +104,13 @@ verify_decode_jwt(token) method
 
 
 def verify_decode_jwt(token):
-    print(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
+    # print(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
     jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
     jwks = json.loads(jsonurl.read())
     unverified_header = jwt.get_unverified_header(token)
     rsa_key = {}
     if 'kid' not in unverified_header:
-        print("missing kid")
+        # print("missing kid")
         raise AuthError({
             'code': 'invalid_header',
             'description': 'Authorization malformed.'
@@ -149,7 +126,7 @@ def verify_decode_jwt(token):
                 'e': key['e']
             }
     if rsa_key:
-        print('rsa_key exists')
+        # print('rsa_key exists')
         try:
             payload = jwt.decode(
                 token,
@@ -162,14 +139,14 @@ def verify_decode_jwt(token):
             return payload
 
         except jwt.ExpiredSignatureError:
-            print("expired signature error")
+            # print("expired signature error")
             raise AuthError({
                 'code': 'token_expired',
                 'description': 'Token expired.'
             }, 401)
 
         except jwt.JWTClaimsError:
-            print("jwt claims error")
+            # print("jwt claims error")
             raise AuthError({
                 'code': 'invalid_claims',
                 'description': 'Incorrect claims. ' +
@@ -207,14 +184,7 @@ def requires_auth(permission=''):
     def requires_auth_decorator(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
-            #if 'profile' not in session:
-                # Redirect to Login page here
-            #    return redirect('/')
-            #print('token at authorization time: {}'.format(session['token']))
-            #token = get_token_auth_header()
-            #token = None
             try:
-            #if session['token'] is not None:
                 token = session['token']
             except:
                 try:
@@ -222,22 +192,13 @@ def requires_auth(permission=''):
                 except:
                     print("token is none")
                     abort(401)
-            print('token at authorization time: {}'.format(token))
+            # print('token at authorization time: {}'.format(token))
             try:
-                #token = None
-                #if session['token']:
-                #    token = session['token']
-                #else:
-                #    token = get_token_auth_header()
-                #print('token at authorization time: {}'.format(token))
-                #if token is None:
-                #    print("token is none")
-                #    abort(400)
                 payload = verify_decode_jwt(token)
-                print('Payload is: {}'.format(payload))
-                print(f'testing for permission: {permission}')
+                # print('Payload is: {}'.format(payload))
+                # print(f'testing for permission: {permission}')
             except Exception:
-                print("verify decode jwt error")
+                # print("verify decode jwt error")
                 abort(401)
 
             check_permissions(permission, payload)

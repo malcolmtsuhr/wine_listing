@@ -317,7 +317,7 @@ def create_app(test_config=None):
             error = True
             flash('An error occurred. Vintner ' + request.form['name'] +
                   ' could not be listed.')
-            print(sys.exc_info())
+            # print(sys.exc_info())
         finally:
             db.session.close()
         return render_template('pages/home.html')
@@ -367,7 +367,7 @@ def create_app(test_config=None):
             error = True
             flash('An error occurred. Vintner ' + request.form['name'] +
                   ' could not be edited.')
-            print(sys.exc_info())
+            # print(sys.exc_info())
         finally:
             db.session.close()
         return redirect(url_for('show_vintner', vintner_id=vintner_id))
@@ -525,7 +525,7 @@ def create_app(test_config=None):
             error = True
             flash('An error occurred. Vino ' + request.form['name'] +
                   ' could not be edited.')
-            print(sys.exc_info())
+            # print(sys.exc_info())
         finally:
             db.session.close()
         return redirect(url_for('show_vino', vino_id=vino_id))
@@ -570,7 +570,7 @@ def create_app(test_config=None):
             error = True
             flash('An error occurred. Vino ' + request.form['name'] +
                   ' could not be listed.')
-            print(sys.exc_info())
+            # print(sys.exc_info())
         finally:
             db.session.close()
         return render_template('pages/home.html')

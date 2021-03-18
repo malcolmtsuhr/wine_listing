@@ -10,6 +10,7 @@ It's an app allowing wine makers and distributors to publicly list data about vi
 The front end "Vino Cellar" has a public face to view vintner and wine data, with an Auth0 authenticated access to add, edit, and delete data based on roles.
 The app lists vintners categorized by area, and wines categorized by type.
 Each is accessible by list view with search filtering, and a detailed profile page to view specific data; wines can also be accessed from their vintners listing page.
+Once logged in, vintners can be added from the index or vintner list pages, while wines can only be added from their vintners profile page.
 Data is referentially linked, and pages are dynamically populated from the current database instance.
 
 Future iterations of the app will expand to provide wine reviews covering tasting notes and food pairings.
