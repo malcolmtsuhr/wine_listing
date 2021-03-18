@@ -133,7 +133,7 @@ def create_app(test_config=None):
     def login():
         # print('Audience: {}'.format(AUTH0_AUDIENCE))
         return auth0.authorize_redirect(
-            redirect_uri='http://0.0.0.0:8080/callback',
+            redirect_uri=AUTH0_CALLBACK_URL,
             audience=AUTH0_AUDIENCE
             )
 

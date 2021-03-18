@@ -1,4 +1,4 @@
-Wine Listing App
+# Wine Listing App
 
 ## Introduction
 
@@ -62,7 +62,7 @@ Once you have finished editing your code, you can push the local repository to y
 ```
 git add . --all   
 git commit -m "your comment"
-git push -u origin master
+git push -u origin main
 ```
 
 #### Virtual Enviornment
