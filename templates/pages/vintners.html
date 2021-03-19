@@ -17,6 +17,9 @@
 		{% endfor %}
 	</ul>
 {% endfor %}
+{% if session['profile'] %}
 <a href="/vintners/create">
 	<button class="btn btn-default btn-lg">Post a vintner</button></a>
+{% else %}
+{% endif %}
 {% endblock %}

@@ -8,9 +8,12 @@
 		</h1>
 		<p class="subtitle">
 			ID: {{ vintner.id }}
+			{% if session['profile'] %}
 			<button class="del-button-vintner"
 			data-id="{{ vintner.id }}">&cross;</button><br/>
 			<a href='{{url_for('edit_vintner', vintner_id=vintner.id)}}'>Edit Vintner</a><br>
+			{% else %}
+			{% endif %}
 		</p>
 		<p>
 			<i class="fas fa-globe-americas"></i> {% if vintner.appellation %}

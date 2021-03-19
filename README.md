@@ -57,7 +57,7 @@ Our tech stack will include the following:
 git remote -v
 git remote remove origin
 git remote add origin <https://github.com/<USERNAME>/<REPO_NAME>.git>
-git branch -M master
+git branch -M main
 ```
 Once you have finished editing your code, you can push the local repository to your Github account using the following commands.
 ```
@@ -129,7 +129,7 @@ python3 test_app.py
 Users are able to access the home page and data records anonymously. The create, edit, and delete functionality is limited to authenticated users with role based permissions.
 
 ### Roles and Permissions
-Login from any page with the ```Manager Log In``` Button in the header bar
+Login from any page with the ```Manager Log In``` Button in the header bar.
 Once logged in, user will see ```Manager Dashboard``` Button in the header bar instead.
 The Manager Dashboard will list user info, and the ```Logout``` Button.
 

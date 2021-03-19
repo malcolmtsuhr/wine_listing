@@ -8,10 +8,13 @@
 		</h1>
 		<p class="subtitle">
 			ID: {{ vino.id }}
+			{% if session['profile'] %}
 			<button class="del-button-vino"
 			data-id="{{ vino.id }}">&cross;</button><br/>
 			<a href='{{url_for('edit_vino',
 			vino_id=vino.id)}}'>Edit Vino</a><br>
+			{% else %}
+			{% endif %}
 		</p>
 		<p>
 			<i class="fas fa-calendar-alt"></i>
