@@ -8,5 +8,6 @@ export ENV='development'
 export FLASK_APP=app.py
 export FLASK_DEBUG=True
 export ALGORITHMS=['RS256']
+export AUTH0_CLIENT_SECRET='xyz'
 
 pip3 install -r requirements.txt
